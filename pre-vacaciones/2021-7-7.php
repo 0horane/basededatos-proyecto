@@ -17,11 +17,32 @@ while ($reg=mysqli_fetch_assoc($result)){
 	$products[]=$reg;
 	
 }
-$products[]="a";
-echo "<pre>";
-print_r($products);
-echo "</pre>";
+//$products[]="a";
+//echo "<pre>";
+//print_r($products);
+//echo "</pre>";
 
+echo "<br><br><br><table border='1'><tr>";
+$row=reset($products);
+$col=reset($row);
+echo "<th>" . $col . "</th>";
+while ($col=next($row)){
+	echo "<th>" . $col . "</th>";
+}
+echo "</tr>";
+while ($row=next($products)){
+	echo "<tr>";
+	$col=reset($row);
+	echo "<th>" . $col . "</th>";
+	while ($col=next($row)){
+		echo "<th>" . $col . "</th>";
+	}
+	
+	
+	echo "</th>";
+}
+
+echo "</table>"
 
 /*
 for ($x=0;x<$count($result);x++)
