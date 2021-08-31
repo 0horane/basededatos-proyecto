@@ -118,9 +118,10 @@
                             for (var Y=0;Y<3;Y++){
                                 for (var x=0;x<3;x++){
                                     for (var y=0;y<3;y++){
-                                        if ((X=locarr[0] && Y=locarr[1]) && gresult(this.board[X][Y])=="u"){
-                                            
+                                        if ((X==locarr[0] && Y==locarr[1]) && gresult(this.board[X][Y])=="u" && this.board[X][Y][x][y]=="") {
+                                            this.board[X][Y][x][y]=" ";
                                         }
+                                         
                                     }}}}
                     }
                     
