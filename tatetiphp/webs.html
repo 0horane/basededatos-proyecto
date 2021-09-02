@@ -10,25 +10,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script>
-        function gresult(barray){
+
+        $( document ).ready(function() {
+
+            gameboard.print("brd");      
+
+            
+
+        })
+
+        function gresult(barray){ //determines result of a regular tic tac toe board
                 if (
-                    barray[0][0]==barray[0][1]==barray[0][2]=="x" ||
-                    barray[1][0]==barray[1][1]==barray[1][2]=="x" ||
-                    barray[2][0]==barray[2][1]==barray[2][2]=="x" ||
-                    barray[0][0]==barray[1][0]==barray[2][0]=="x" ||
-                    barray[0][1]==barray[1][1]==barray[2][1]=="x" ||
-                    barray[0][2]==barray[1][2]==barray[2][2]=="x" ||
-                    barray[0][0]==barray[1][1]==barray[2][2]=="x" ||
-                    barray[0][2]==barray[1][1]==barray[2][0]=="x" 
+                    (barray[0][0]=="x" && barray[0][1]=="x" && barray[0][2]=="x") ||
+                    (barray[1][0]=="x" && barray[1][1]=="x" && barray[1][2]=="x") ||
+                    (barray[2][0]=="x" && barray[2][1]=="x" && barray[2][2]=="x") ||
+                    (barray[0][0]=="x" && barray[1][0]=="x" && barray[2][0]=="x") ||
+                    (barray[0][1]=="x" && barray[1][1]=="x" && barray[2][1]=="x") ||
+                    (barray[0][2]=="x" && barray[1][2]=="x" && barray[2][2]=="x") ||
+                    (barray[0][0]=="x" && barray[1][1]=="x" && barray[2][2]=="x") ||
+                    (barray[0][2]=="x" && barray[1][1]=="x" && barray[2][0]=="x") 
                 ){return "x";} else if (
-                    barray[0][0]==barray[0][1]==barray[0][2]=="o" ||
-                    barray[1][0]==barray[1][1]==barray[1][2]=="o" ||
-                    barray[2][0]==barray[2][1]==barray[2][2]=="o" ||
-                    barray[0][0]==barray[1][0]==barray[2][0]=="o" ||
-                    barray[0][1]==barray[1][1]==barray[2][1]=="o" ||
-                    barray[0][2]==barray[1][2]==barray[2][2]=="o" ||
-                    barray[0][0]==barray[1][1]==barray[2][2]=="o" ||
-                    barray[0][2]==barray[1][1]==barray[2][0]=="o" 
+                    (barray[0][0]=="o" && barray[0][1]=="o" && barray[0][2]=="o") ||
+                    (barray[1][0]=="o" && barray[1][1]=="o" && barray[1][2]=="o") ||
+                    (barray[2][0]=="o" && barray[2][1]=="o" && barray[2][2]=="o") ||
+                    (barray[0][0]=="o" && barray[1][0]=="o" && barray[2][0]=="o") ||
+                    (barray[0][1]=="o" && barray[1][1]=="o" && barray[2][1]=="o") ||
+                    (barray[0][2]=="o" && barray[1][2]=="o" && barray[2][2]=="o") ||
+                    (barray[0][0]=="o" && barray[1][1]=="o" && barray[2][2]=="o") ||
+                    (barray[0][2]=="o" && barray[1][1]=="o" && barray[2][0]=="o") 
                 ) {return "o";} else if (
                     (barray[0][0]=="x"||barray[0][0]=="o") &&
                     (barray[0][1]=="x"||barray[0][1]=="o") &&
@@ -47,7 +56,7 @@
                     this.board=board;
                     this.turn=turn;
                 }
-                reset(){
+                reset(){ //resets whole gameboard
                     this.board=
                     [
                         [
@@ -105,8 +114,8 @@
                     this.turn="x";
                 }
 
-                move(loc){
-                    locarr=loc.split("");
+                move(loc){ 
+                    let locarr=loc.split("");
                     if (this.board[parseInt(locarr[0])][parseInt(locarr[1])][parseInt(locarr[2])][parseInt(locarr[3])]==" "){
                         this.board[parseInt(locarr[0])][parseInt(locarr[1])][parseInt(locarr[2])][parseInt(locarr[3])]=this.turn;
                         if(this.turn=="x"){
@@ -118,121 +127,88 @@
                             for (var Y=0;Y<3;Y++){
                                 for (var x=0;x<3;x++){
                                     for (var y=0;y<3;y++){
-                                        if ((X==locarr[0] && Y==locarr[1]) && gresult(this.board[X][Y])=="u" && this.board[X][Y][x][y]=="") {
-                                            this.board[X][Y][x][y]=" ";
+                                        if (  ( X==locarr[2] && Y==locarr[3] && gresult(this.board[X][Y])=="u" ) || ( gresult(this.board[locarr[2]][locarr[3]]) !="u" && gresult(this.board[X][Y])=="u" )  ) { // (  ( tile is in corresponding board && correponding board is in play ) || ( corresponding board is not in play && tile's board is in play )  )
+                                            if(this.board[X][Y][x][y]==""){
+                                                this.board[X][Y][x][y]=" ";
+                                            }
+
+                                        } else if (this.board[X][Y][x][y]==" "){
+                                            this.board[X][Y][x][y]="";
                                         }
-                                         
+                                        
+                                        
                                     }}}}
                     }
                     
                 }
-            }
 
-
-        $( document ).ready(function() {
-
-            
-            let gameboard= new game([],"");
-            let player = 1;        
-            let html = `<form action="welcome.php" method="post">`;
-            html+="<table>";
-            for (var X=0;X<3;X++){
-                html+="<tr>";
-                for (var Y=0;Y<3;Y++){
-                    html+=`<td>
-                           <table>`;
-                    for (var x=0;x<3;x++){
-                        html+="<tr>";    
-                        for (var y=0;y<3;y++){
+                print(div){
+                    let html = "<div>"; //`<form action="welcome.php" method="post">`;
+                    html+="<table>";
+                    for (var X=0;X<3;X++){
+                        html+="<tr>";
+                        for (var Y=0;Y<3;Y++){
                             html+=`<td>
-                                   <input type="submit" name="`+X+Y+x+y+`" class="`;
-                            switch (gameboard[X][Y][x][y]){
-                                case " ":
-                                    html+=`empty" value="  ">`;
-                                    break;
-                                case "":
-                                    html+=`used" value="  " disabled>`;
-                                    break;
-                                case "x":
-                                    html+=`x" value="x" disabled>`;
-                                    break;
-                                case "o":
-                                    html+=`o" value="o" disabled>`;
-                                    break;
+                                <table>`;
+                            for (var x=0;x<3;x++){
+                                html+="<tr>";    
+                                for (var y=0;y<3;y++){
+                                    html+=`<td>
+                                        <input onclick="gameboard.move(this.name);gameboard.print()" type="submit" name="`+X+Y+x+y+`" class="`;
+                                    switch (this.board[X][Y][x][y]){
+                                        case " ":
+                                            html+=`empty" value="  ">`;
+                                            break;
+                                        case "":
+                                            html+=`used" value="  " disabled>`;
+                                            break;
+                                        case "x":
+                                            html+=`x" value="x" disabled>`;
+                                            break;
+                                        case "o":
+                                            html+=`o" value="o" disabled>`;
+                                            break;
+                                    }
+                                    html+=`</td>`;
+                                }
+                                html+="</tr>";    
                             }
-                            html+=`</td>`;
+                            html+=`</table>
+                                </td>`;
                         }
-                        html+="</tr>";    
+                        html+="</tr>";
                     }
                     html+=`</table>
-                           </td>`;
+                        </div>`//</form>`;
+
+                    $("#brd").html(html);
+
                 }
-                html+="</tr>";
             }
-            html+=`</table>
-                   </form>`;
 
-            document.write(html);
+            let gameboard= new game([],"");
+            let player = 1;        
+            gameboard.reset();
+            
 
-        })
+
 
     </script>
 
     <style>
         input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-        }
 
-        /* Create a custom radio button */
-        .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
+
+        cursor: pointer;
         height: 25px;
         width: 25px;
-        background-color: #eee;
-        border-radius: 50%;
         }
 
-        /* On mouse-over, add a grey background color */
-        label input ~ .checkmark {
-        background-color: #ccc;
-        }
-
-        /* When the radio button is checked, add a blue background */
-        label input:checked ~ .checkmark {
-        background-color: #2196F3;
-        }
-
-        /* Create the indicator (the dot/circle - hidden when not checked) */
-        .checkmark:after {
-        content: "";
-        position: absolute;
-        display: none;
-        }
-
-        /* Show the indicator (dot/circle) when checked */
-        label input:checked ~ .checkmark:after {
-        display: block;
-        }
-
-        /* Style the indicator (dot/circle) */
-        label .checkmark:after {
-        top: 9px;
-        left: 9px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: white;
-        }
+        
     </style>
 
 </head>
 <body>
-    
+    <div id="brd"></div>
 </body>
 </html>
