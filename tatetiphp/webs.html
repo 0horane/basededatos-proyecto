@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaTeTi</title>
+    <link rel="stylesheet" href="checkboxes.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -48,7 +49,7 @@
                     (barray[2][0]=="x"||barray[2][0]=="o") &&
                     (barray[2][1]=="x"||barray[2][1]=="o") &&
                     (barray[2][2]=="x"||barray[2][2]=="o")
-                ) {return "t";} else {return "u";}
+                ) {return "t";} else {return "";}
             }
 
             class game {
@@ -127,7 +128,7 @@
                             for (var Y=0;Y<3;Y++){
                                 for (var x=0;x<3;x++){
                                     for (var y=0;y<3;y++){
-                                        if (  ( X==locarr[2] && Y==locarr[3] && gresult(this.board[X][Y])=="u" ) || ( gresult(this.board[locarr[2]][locarr[3]]) !="u" && gresult(this.board[X][Y])=="u" )  ) { // (  ( tile is in corresponding board && correponding board is in play ) || ( corresponding board is not in play && tile's board is in play )  )
+                                        if (  ( X==locarr[2] && Y==locarr[3] && gresult(this.board[X][Y])=="" ) || ( gresult(this.board[locarr[2]][locarr[3]]) !="" && gresult(this.board[X][Y])=="" )  ) { // (  ( tile is in corresponding board && correponding board is in play ) || ( corresponding board is not in play && tile's board is in play )  )
                                             if(this.board[X][Y][x][y]==""){
                                                 this.board[X][Y][x][y]=" ";
                                             }
@@ -139,17 +140,40 @@
                                         
                                     }}}}
                     }
-                    
+                    var minboard = [[],[],[]];
+                    for (var X2 = 0; X2<3; X2++){
+                        for (var Y2 = 0; Y2<3; Y2++){
+                            minboard[X2][Y2] = gresult(this.board[X2][Y2]) 
+                        }
+                    }
+                    if (gresult(minboard)!=""){
+                        $(document.body).append(`<h1>Ganó el jugador ${gresult(minboard)}</h1>`);
+                        for (var X=0;X<3;X++){
+                            for (var Y=0;Y<3;Y++){
+                                for (var x=0;x<3;x++){
+                                    for (var y=0;y<3;y++){
+                                        if (this.board[X][Y][x][y]==" "){
+                                            this.board[X][Y][x][y]=""
+                                        }}}}}   
+                    }
                 }
 
                 print(div){
                     let html = "<div>"; //`<form action="welcome.php" method="post">`;
+                    let boardclass= ""; 
                     html+="<table>";
                     for (var X=0;X<3;X++){
                         html+="<tr>";
                         for (var Y=0;Y<3;Y++){
+                            if (gresult(this.board[X][Y])=="o"){
+                                boardclass="lO"
+                            } else if (gresult(this.board[X][Y])=="x"){
+                                boardclass="lX"
+                            } else {
+                                boardclass=""
+                            }
                             html+=`<td>
-                                <table>`;
+                                <table class="${boardclass}">`;
                             for (var x=0;x<3;x++){
                                 html+="<tr>";    
                                 for (var y=0;y<3;y++){
@@ -163,10 +187,10 @@
                                             html+=`used" value="  " disabled>`;
                                             break;
                                         case "x":
-                                            html+=`x" value="x" disabled>`;
+                                            html+=`x" value="X"  disabled>`;
                                             break;
                                         case "o":
-                                            html+=`o" value="o" disabled>`;
+                                            html+=`o" value="O"  disabled>`;
                                             break;
                                     }
                                     html+=`</td>`;
@@ -195,17 +219,7 @@
 
     </script>
 
-    <style>
-        input {
 
-
-        cursor: pointer;
-        height: 25px;
-        width: 25px;
-        }
-
-        
-    </style>
 
 </head>
 <body>

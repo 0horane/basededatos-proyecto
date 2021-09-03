@@ -1,0 +1,28 @@
+.o{
+    color:#7d81ff;
+    text-align:center;
+
+    
+}
+
+
+.x{
+    color:#ff6257;
+    text-align:center;
+}
+
+.lX{
+    clip-path:polygon(0% 25%, 25% 0%, 50% 25%, 75% 0%, 100% 25%, 75% 50%, 100% 75%, 75% 100%, 50% 75%, 25% 100%, 0% 75%, 25% 50%);
+    background-color: #ff6257;
+}
+
+.lO{
+    clip-path:circle(50%  at 50% 50%);
+    background-color: #7d81ff;
+}
+
+input {
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+}
