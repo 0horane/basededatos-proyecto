@@ -1,0 +1,3 @@
+CREATE TABLE `uttt`.`users` ( `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(64) NOT NULL , `password`  , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `uttt`.`games` ( `gameid` INT NOT NULL AUTO_INCREMENT , `useridX` INT NOT NULL , `useridO` INT NOT NULL , `board` LONGTEXT NOT NULL , `turn` BOOLEAN NOT NULL , PRIMARY KEY (`gameid`)) ENGINE = InnoDB;
