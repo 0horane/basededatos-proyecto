@@ -3,13 +3,13 @@
 define('serverIP', 'localhost');
 define('user', 'root');
 
-$omysqli = new mysqli(serverIP, user, '', 'classicmodels');
-$sqlquery = "SELECT * FROM products";
+$omysqli = new mysqli(serverIP, user, '', 'uttt');
+$sqlquery = 'select * from users where users.username  = "eitan"';
 
 if ($omysqli->connect_errno) {printf("connect error: " . $omysqli->connect_error);}
 
 if(!($result = $omysqli->query($sqlquery))){exit($omysqli->error);}
-
+var_dump($result);
 while ($reg=mysqli_fetch_assoc($result)){
 	//for ($x=0;$x<count($reg);$x++){
 		//printf(join($reg));

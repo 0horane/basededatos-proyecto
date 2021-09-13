@@ -184,21 +184,12 @@ $gameboard->move("0011");
 							<?php for ($x=0;$x<3;$x++){ ?>
 								<tr>
 									<?php for ($y=0;$y<3;$y++){ ?>
-										<td><input type="submit" name="<?php echo X.Y.x.y; ?>" class="
-										<?php switch($gameboard->board[$X][$Y][$x][$y]){
-											case "x":
-												echo 'x" value="X" disabled'; 
-												break;
-											case "o": 
-												echo 'o" value="O" disabled'; 
-												break;
-											case " ": 
-												echo 'empty" value="  "'; 
-												break;
-											case "": 
-												echo 'X" value="  " disabled'; 
-												break;
-										} ?>></td>
+										<td>
+										<container class ="<?php echo $tileval=$gameboard->board[$X][$Y][$x][$y]=="x" ? "x" : ($tileval=="o" ? "o" : ($tileval==" " ? "empty" : "disabled"));  ?>">
+											<input type="radio" name="tile" value="<?php echo $X.$Y.$x.$y; ?>" <?php echo tileval==" " ? "" : "disabled"; ?>>
+											<div><?php echo $tileval=="x" ? "x" : ($tileval=="o" ? "o" : "  ");  ?></div>
+										</container>
+										</td>
 									<?php } ?>
 								</tr>
 							<?php } ?>
