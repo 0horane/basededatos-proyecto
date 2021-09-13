@@ -172,7 +172,7 @@ $gameboard->move("0011");
 		</style>
 	</head>
 	<body>
-		<form>
+		<form action="receive.php" method="post">
 		<table>
 			<?php for ($X=0;$X<3;$X++){ ?>
 				<tr>
