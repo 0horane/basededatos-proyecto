@@ -106,7 +106,7 @@ class game{
 	
 	public function move($loc){
 		$locarr = str_split($loc);
-		var_dump($loc);
+//		var_dump($loc);
 		if ($this->board[$locarr[0]][$locarr[1]][$locarr[2]][$locarr[3]]==" "){
 			$this->board[$locarr[0]][$locarr[1]][$locarr[2]][$locarr[3]]=$this->turn;
 			if($this->turn=="x"){
@@ -167,8 +167,12 @@ $gameboard->move("0011");
 <html>
 	<head>
 		<link rel="stylesheet" href="checkboxes.css">
+		<style>
+
+		</style>
 	</head>
 	<body>
+		<form>
 		<table>
 			<?php for ($X=0;$X<3;$X++){ ?>
 				<tr>
@@ -185,8 +189,8 @@ $gameboard->move("0011");
 								<tr>
 									<?php for ($y=0;$y<3;$y++){ ?>
 										<td>
-										<container class ="<?php echo $tileval=$gameboard->board[$X][$Y][$x][$y]=="x" ? "x" : ($tileval=="o" ? "o" : ($tileval==" " ? "empty" : "disabled"));  ?>">
-											<input type="radio" name="tile" value="<?php echo $X.$Y.$x.$y; ?>" <?php echo tileval==" " ? "" : "disabled"; ?>>
+										<container class ="<?php $tileval=$gameboard->board[$X][$Y][$x][$y]; echo $tileval=="x" ? "x" : ($tileval=="o" ? "o" : ($tileval==" " ? "empty" : "disabled"));  ?>">
+											<input type="radio" name="tile" value="<?php echo $X.$Y.$x.$y; ?>" <?php echo $tileval==" " ? "" : "disabled"; ?>>
 											<div><?php echo $tileval=="x" ? "x" : ($tileval=="o" ? "o" : "  ");  ?></div>
 										</container>
 										</td>
@@ -197,6 +201,9 @@ $gameboard->move("0011");
 					<?php } ?>
 				</tr>
 			<?php }	 ?>
-		</table>
+		</table><br><input type="submit"></form>
+		<pre>
+		<?php var_dump($gameboard->board) ?>
+		</pre>
 	</body>
 </html>

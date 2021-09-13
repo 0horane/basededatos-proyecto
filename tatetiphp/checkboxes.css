@@ -26,3 +26,11 @@ input {
     height: 25px;
     width: 25px;
 }
+
+.x input{
+	display:none ;
+}
+
+.o input{
+	display:none ;
+}

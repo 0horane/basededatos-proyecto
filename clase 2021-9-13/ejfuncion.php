@@ -1,14 +1,13 @@
 <?php
 
 function isemail ($string){
-	
-	return is_string($string) && strlen($string)>6 && str_contains($string, "@") && str_ends_with($string, ".com") ? true : false;
+
+	//str_contains($string, "@") && substr($string, 0,1)!="@"
+	return is_string($string) && strlen($string)>6 && strpos($string ,"@") && str_ends_with($string, ".com") ? true : false;
 	
 }
 
 
-echo isemail("shdjhksjhklsfjhklsfkjl@gmail.com") ? "true" : "false", "<br>";
-echo isemail(4) ? "true" : "false", "<br>";
-echo isemail("shdjhksjhklsfjhklsfkjl@gmail.co") ? "true" : "false", "<br>";
-echo isemail("shdjhksjhklsfjhklsfkjl&gmail.com") ? "true" : "false", "<br>";
+echo isset($_GET["email"]) ?  (isemail($_GET["email"]) ? "true" : "false") : "string is empy"  , "<br>";
+
 ?>
