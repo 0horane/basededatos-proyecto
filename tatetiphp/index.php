@@ -17,15 +17,9 @@
 </form>
 
 <?php 
+	exit();
 	} else {
-		if ($_SESSION["li"]==1){
-			$_SESSION["li"]=0;
-			echo "logged in";
-		} else if ($_SESSION["li"]==2){
-			$_SESSION["li"]=0;
-			echo "account " . $_SESSION["user"] . " created";
-			
-		}
+
 ?>
 
 <form action="index.php?a=logout" method="post">	<!-- estos forms que uso como botones se tienen que reemplazar con <a> mas adelante -->
@@ -34,6 +28,13 @@
 
 <?php 
 	}
+
+	if (isset($_SESSION["msg"])){
+		echo($_SESSION["msg"]);
+		$_SESSION["msg"]=null;
+	}
+
+
 	require("r_sqlinit.php");
 	$sqlquery= 'select * from games where (games.result = 0) and (games.useridX = "' . $_SESSION['id'] . '" or games.useridO = "' . $_SESSION['id'] . '")';
 	if(!($result = $mysqlinstance->query($sqlquery))){exit($mysqlinstance->error);}

@@ -23,7 +23,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 		echo("account created");
 		session_start();
 		$_SESSION["user"]=$_POST['usr'];
-		$_SESSION["li"]=2;
+		$_SESSION["msg"]="account created";
 		$sqlquery='select * from users where users.username = "' . $_SESSION["user"] . '"';
 		$_SESSION["id"]=mysqli_fetch_assoc($mysqlinstance->query($sqlquery))["id"];
 		done();
@@ -32,7 +32,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 		   echo("logged in");
 		   session_start();
 		   $_SESSION["user"]=$_POST['usr'];
-		   $_SESSION["li"]=1;
+		   $_SESSION["msg"]="logged in";
 		   $sqlquery='select * from users where users.username = "' . $_SESSION["user"] . '"';
 		   $_SESSION["id"]=mysqli_fetch_assoc($mysqlinstance->query($sqlquery))["id"];
 		   done();

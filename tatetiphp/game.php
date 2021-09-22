@@ -1,18 +1,32 @@
 <?php
 session_start();
+
+if (isset($_SESSION["msg"])){
+	echo($_SESSION["msg"]);
+	$_SESSION["msg"]=null;
+}
+
+
 require("r_gameengine.php");
 require("r_sqlinit.php");
 $gameboard = new game();
 $datareceived=mysqli_fetch_assoc($mysqlinstance->query("select * from games where gameid = " . $_GET["gameid"] ));//["board"]
 $gameboard->reset(1,1);
 
-$moveslist=explode(",",$datareceived["board"]);
-var_dump($moveslist);
-echo "<br>";
-var_dump($datareceived["board"]);
-for ($i=0;$i<count($moveslist);$i++){
-	$gameboard->move($moveslist[$i]);
-//	echo "movi" . $moveslist[$i] . "<br>";
+
+var_dump($_SESSION);
+echo("<br>");
+var_dump($datareceived);
+
+if (!($datareceived["board"]=="")){
+	$moveslist=explode(",",$datareceived["board"]);
+//	var_dump($moveslist);
+	echo "<br>";
+//	var_dump($datareceived["board"]);
+	for ($i=0;$i<count($moveslist);$i++){
+		$gameboard->move($moveslist[$i]);
+	//	echo "movi" . $moveslist[$i] . "<br>";
+	}
 }
 ?>
 
@@ -25,7 +39,7 @@ for ($i=0;$i<count($moveslist);$i++){
 	</head>
 	<body>
 		<form action="receive.php?gameid=<?php echo $_GET['gameid']; ?>" method="post">
-		<table>
+		<table>		<!--REPLACE ALL THIS WITH iFRAME-->
 			<?php for ($X=0;$X<3;$X++){ ?>
 				<tr>
 					<?php for ($Y=0;$Y<3;$Y++){ ?>
