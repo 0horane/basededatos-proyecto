@@ -22,7 +22,7 @@ if (!($datareceived["board"]=="")){
 $gameboard->move($_POST['tile']);
 
 
-var_dump($gameboard->board == $gameboard2->board,$_SESSION['user']==$datareceived["useridX"],$datareceived["turn"]==0,$_SESSION['user'],$datareceived["useridX"]);
+//var_dump($gameboard->board == $gameboard2->board,$_SESSION['user']==$datareceived["useridX"],$datareceived["turn"]==0,$_SESSION['user'],$datareceived["useridX"]);
 
 if ($gameboard->board == $gameboard2->board){
 	$_SESSION["msg"]="impossible move/";
@@ -30,7 +30,7 @@ if ($gameboard->board == $gameboard2->board){
 	if ( ($_SESSION['id']==$datareceived["useridX"]  && $datareceived["turn"]==0 ) ||  ( $_SESSION['id']==$datareceived["useridO"] && $datareceived["turn"]==1 ) ){
 		$pcomma=$datareceived["board"]=="" ? "" : ",";
 		$turnint= $gameboard->turn=="x" ? 0 : 1;
-		$query="UPDATE games SET board = '" . $datareceived["board"] . $pcomma . $_POST["tile"]."' , turn=" . $turnint;
+		$query="UPDATE games SET board = '" . $datareceived["board"] . $pcomma . $_POST["tile"]."' , turn=" . $turnint . " WHERE gameid =" . $_GET["gameid"];
 		$mysqlinstance->query($query);
 		
 	} else{$_SESSION["msg"]="wrong user/turn";}

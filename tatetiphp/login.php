@@ -2,16 +2,7 @@
 
 require_once("r_sqlinit.php");
 
-function done(){
-	if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-		$uri = 'https://';
-	} else {
-		$uri = 'http://';
-	}
-	$uri .= $_SERVER['HTTP_HOST'];
-	header('Location: index.php');
-	exit;
-}
+
 
 if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 	
@@ -26,7 +17,8 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 		$_SESSION["msg"]="account created";
 		$sqlquery='select * from users where users.username = "' . $_SESSION["user"] . '"';
 		$_SESSION["id"]=mysqli_fetch_assoc($mysqlinstance->query($sqlquery))["id"];
-		done();
+		header('Location: index.php');
+		exit;
 	} else { 
 		if  (md5($_POST['pwd']) == mysqli_fetch_assoc($result)["password"]){
 		   echo("logged in");
@@ -35,7 +27,8 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 		   $_SESSION["msg"]="logged in";
 		   $sqlquery='select * from users where users.username = "' . $_SESSION["user"] . '"';
 		   $_SESSION["id"]=mysqli_fetch_assoc($mysqlinstance->query($sqlquery))["id"];
-		   done();
+			header('Location: index.php');
+			exit;
 	   } else {
 		   echo("incorrect password");
 	   }

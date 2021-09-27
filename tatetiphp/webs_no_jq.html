@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaTeTi</title>
+    <style>
+    	.o{
+    color:#7d81ff;
+    text-align:center;
+
+    
+}
+
+
+
+.x{
+    color:#ff6257;
+    text-align:center;
+}
+
+.lX{
+    clip-path:polygon(0% 25%, 25% 0%, 50% 25%, 75% 0%, 100% 25%, 75% 50%, 100% 75%, 75% 100%, 50% 75%, 25% 100%, 0% 75%, 25% 50%);
+    background-color: #ff6257;
+}
+
+.lO{
+    clip-path:circle(50%  at 50% 50%);
+    background-color: #7d81ff;
+}
+
+input {
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+}
+    		
+    	</style>
+    
+
+    <script>
+document.write('<div id="brd"></div>');
+        
+
+        function gresult(barray){ //determines result of a regular tic tac toe board
+                if (
+                    (barray[0][0]=="x" && barray[0][1]=="x" && barray[0][2]=="x") ||
+                    (barray[1][0]=="x" && barray[1][1]=="x" && barray[1][2]=="x") ||
+                    (barray[2][0]=="x" && barray[2][1]=="x" && barray[2][2]=="x") ||
+                    (barray[0][0]=="x" && barray[1][0]=="x" && barray[2][0]=="x") ||
+                    (barray[0][1]=="x" && barray[1][1]=="x" && barray[2][1]=="x") ||
+                    (barray[0][2]=="x" && barray[1][2]=="x" && barray[2][2]=="x") ||
+                    (barray[0][0]=="x" && barray[1][1]=="x" && barray[2][2]=="x") ||
+                    (barray[0][2]=="x" && barray[1][1]=="x" && barray[2][0]=="x") 
+                ){return "x";} else if (
+                    (barray[0][0]=="o" && barray[0][1]=="o" && barray[0][2]=="o") ||
+                    (barray[1][0]=="o" && barray[1][1]=="o" && barray[1][2]=="o") ||
+                    (barray[2][0]=="o" && barray[2][1]=="o" && barray[2][2]=="o") ||
+                    (barray[0][0]=="o" && barray[1][0]=="o" && barray[2][0]=="o") ||
+                    (barray[0][1]=="o" && barray[1][1]=="o" && barray[2][1]=="o") ||
+                    (barray[0][2]=="o" && barray[1][2]=="o" && barray[2][2]=="o") ||
+                    (barray[0][0]=="o" && barray[1][1]=="o" && barray[2][2]=="o") ||
+                    (barray[0][2]=="o" && barray[1][1]=="o" && barray[2][0]=="o") 
+                ) {return "o";} else if (
+                    (barray[0][0]=="x"||barray[0][0]=="o") &&
+                    (barray[0][1]=="x"||barray[0][1]=="o") &&
+                    (barray[0][2]=="x"||barray[0][2]=="o") &&
+                    (barray[1][0]=="x"||barray[1][0]=="o") &&
+                    (barray[1][1]=="x"||barray[1][1]=="o") &&
+                    (barray[1][2]=="x"||barray[1][2]=="o") &&
+                    (barray[2][0]=="x"||barray[2][0]=="o") &&
+                    (barray[2][1]=="x"||barray[2][1]=="o") &&
+                    (barray[2][2]=="x"||barray[2][2]=="o")
+                ) {return "t";} else {return "";}
+            }
+
+            class game {
+                constructor(board,turn){
+                    this.board=board;
+                    this.turn=turn;
+                }
+                reset(){ //resets whole gameboard
+                    this.board=
+                    [
+                        [
+                            [
+                                [" "," "," "],
+                                [" "," "," "],
+                                [" "," "," "]
+                            ],
+                            [
+                                [" "," "," "],
+                                [" "," "," "],
+                                [" "," "," "]
+                            ],
+                            [
+                                [" "," "," "],
+                                [" "," "," "],
+                                [" "," "," "]
+                            ]
+                        ],
+                        [
+                            [
+                                [" "," "," "],
+                                [" "," "," "],
+                                [" "," "," "]
+                            ],
+                            [
+                                [" "," "," "],
+                                [" "," "," "],
+                                [" "," "," "]
+                            ],
+                            [
+                                [" "," "," "],
+                                [" "," "," "],
+                                [" "," "," "]
+                            ],
+                        ],
+                        [
+                            [
+                                [" "," "," "],
+                                [" "," "," "],
+                                [" "," "," "]
+                            ],
+                            [
+                                [" "," "," "],
+                                [" "," "," "],
+                                [" "," "," "]
+                            ],
+                            [
+                                [" "," "," "],
+                                [" "," "," "],
+                                [" "," "," "]
+                            ],
+                        ]
+                    ];
+                    this.turn="x";
+                }
+
+                move(loc){ 
+                    let locarr=loc.split("");
+                    if (this.board[parseInt(locarr[0])][parseInt(locarr[1])][parseInt(locarr[2])][parseInt(locarr[3])]==" "){
+                        this.board[parseInt(locarr[0])][parseInt(locarr[1])][parseInt(locarr[2])][parseInt(locarr[3])]=this.turn;
+                        if(this.turn=="x"){
+                            this.turn="o";
+                        } else {
+                            this.turn="x";
+                        }
+                        for (var X=0;X<3;X++){
+                            for (var Y=0;Y<3;Y++){
+                                for (var x=0;x<3;x++){
+                                    for (var y=0;y<3;y++){
+                                        if (  ( X==locarr[2] && Y==locarr[3] && gresult(this.board[X][Y])=="" ) || ( gresult(this.board[locarr[2]][locarr[3]]) !="" && gresult(this.board[X][Y])=="" )  ) { // (  ( tile is in corresponding board && correponding board is in play ) || ( corresponding board is not in play && tile's board is in play )  )
+                                            if(this.board[X][Y][x][y]==""){
+                                                this.board[X][Y][x][y]=" ";
+                                            }
+
+                                        } else if (this.board[X][Y][x][y]==" "){
+                                            this.board[X][Y][x][y]="";
+                                        }
+                                        
+                                        
+                                    }}}}
+                    }
+                    var minboard = [[],[],[]];
+                    for (var X2 = 0; X2<3; X2++){
+                        for (var Y2 = 0; Y2<3; Y2++){
+                            minboard[X2][Y2] = gresult(this.board[X2][Y2]) 
+                        }
+                    }
+                    if (gresult(minboard)!=""){
+                      //  $(document.body).append(`<h1>Ganó el jugador ${gresult(minboard)}</h1>`);
+                        document.write(document.innerHTML+`<h1>Ganó el jugador ${gresult(minboard)}</h1>`);
+                        for (var X=0;X<3;X++){
+                            for (var Y=0;Y<3;Y++){
+                                for (var x=0;x<3;x++){
+                                    for (var y=0;y<3;y++){
+                                        if (this.board[X][Y][x][y]==" "){
+                                            this.board[X][Y][x][y]=""
+                                        }}}}}   
+                    }
+                }
+
+                print(div){
+                    let html = "<div>"; //`<form action="welcome.php" method="post">`;
+                    let boardclass= ""; 
+                    html+="<table>";
+                    for (var X=0;X<3;X++){
+                        html+="<tr>";
+                        for (var Y=0;Y<3;Y++){
+                            if (gresult(this.board[X][Y])=="o"){
+                                boardclass="lO"
+                            } else if (gresult(this.board[X][Y])=="x"){
+                                boardclass="lX"
+                            } else {
+                                boardclass=""
+                            }
+                            html+=`<td>
+                                <table class="${boardclass}">`;
+                            for (var x=0;x<3;x++){
+                                html+="<tr>";    
+                                for (var y=0;y<3;y++){
+                                    html+=`<td>
+                                        <input onclick="gameboard.move(this.name);gameboard.print()" type="submit" name="`+X+Y+x+y+`" class="`;
+                                    switch (this.board[X][Y][x][y]){
+                                        case " ":
+                                            html+=`empty" value="  ">`;
+                                            break;
+                                        case "":
+                                            html+=`used" value="  " disabled>`;
+                                            break;
+                                        case "x":
+                                            html+=`x" value="X"  disabled>`;
+                                            break;
+                                        case "o":
+                                            html+=`o" value="O"  disabled>`;
+                                            break;
+                                    }
+                                    html+=`</td>`;
+                                }
+                                html+="</tr>";    
+                            }
+                            html+=`</table>
+                                </td>`;
+                        }
+                        html+="</tr>";
+                    }
+                    html+=`</table>
+                        </div>`//</form>`;
+
+                    document.getElementById("brd").innerHTML=html;    
+                  //  $("#brd").html(html);
+
+                }
+            }
+
+            let gameboard= new game([],"");
+            let player = 1;        
+            gameboard.reset();
+            gameboard.print("brd");
+
+
+
+    </script>
+
+
+
+</head>
+<body id="abc">
+    
+</body>
+</html>

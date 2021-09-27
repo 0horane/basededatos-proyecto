@@ -1,3 +1,5 @@
+using the open source Omni notes app as a base
+
 calendar with sqares for days
 each square is white by default divided into x diagonal parts, each of which can be colored blue. the shade of blue varies randomly a bit. (or by how much text is written). Option to color day by mood/amount of checklist done/colored checklist
 the whole app can be password protected
@@ -12,7 +14,7 @@ search
 sync with google calendar and through that with classroom
 
 regular notes also available, calendars would be a kind of notes
-this could all be added to omni notes as thats already open source.
+
 posibly many calendars
 
 for example, having a diary, vent-1, dreams, daily-checklist(with alarms)

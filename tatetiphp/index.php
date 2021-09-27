@@ -24,7 +24,10 @@
 	
 	echo "</table>";
 ?>
-	
+
+<form action="newgame.php" >	
+	<input type="submit" value="Crear juego nuevo">
+</form>
 
 <?php 
 	

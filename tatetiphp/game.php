@@ -8,9 +8,9 @@ $datareceived=mysqli_fetch_assoc($mysqlinstance->query("select * from games wher
 $gameboard->reset(1,1);
 
 
-var_dump($_SESSION);
-echo("<br>");
-var_dump($datareceived);
+//var_dump($_SESSION);
+//echo("<br>");
+//var_dump($datareceived);
 
 if (!($datareceived["board"]=="")){
 	$moveslist=explode(",",$datareceived["board"]);
@@ -34,16 +34,16 @@ if (!($datareceived["board"]=="")){
 	<body>
 		<form action="receive.php?gameid=<?php echo $_GET['gameid']; ?>" method="post">
 		<table>		<!--REPLACE ALL THIS WITH iFRAME-->
-			<?php for ($X=0;$X<3;$X++){ ?>
+			<?php for ($i=0;$i<3;$i++){ ?> <!--   i es eje X grande, i es eje Y grande, k es eje x pequenio, l es eje x pequenio     --> 
 				<tr>
-					<?php for ($Y=0;$Y<3;$Y++){ ?>
-						<td><table<?php echo gresult($gameboard->board[$X][$Y])=="x" ? " class='lX'" : (gresult($gameboard->board[$X][$Y])=="o" ? " class='lO'" : "");?>>
-							<?php for ($x=0;$x<3;$x++){ ?>
+					<?php for ($j=0;$j<3;$j++){ ?>
+						<td><table<?php echo gresult($gameboard->board[$i][$j])=="x" ? " class='lX'" : (gresult($gameboard->board[$i][$j])=="o" ? " class='lO'" : "");?>>
+							<?php for ($k=0;$k<3;$k++){ ?>
 								<tr>
-									<?php for ($y=0;$y<3;$y++){ ?>
+									<?php for ($l=0;$l<3;$l++){ ?>
 										<td>
-										<container class ="<?php $tileval=$gameboard->board[$X][$Y][$x][$y]; echo $tileval=="x" ? "x" : ($tileval=="o" ? "o" : ($tileval==" " ? "empty" : "disabled"));  ?>">
-											<input type="radio" name="tile" value="<?php echo $X.$Y.$x.$y; ?>" <?php echo $tileval==" " ? "" : "disabled"; ?>>
+										<container class ="<?php $tileval=$gameboard->board[$i][$j][$k][$l]; echo $tileval=="x" ? "x" : ($tileval=="o" ? "o" : ($tileval==" " ? "empty" : "disabled"));  ?>">
+											<input type="radio" name="tile" value="<?php echo $i.$j.$k.$l; ?>" <?php echo $tileval==" " ? "" : "disabled"; ?>>
 											<div><?php echo $tileval=="x" ? "x" : ($tileval=="o" ? "o" : "  ");  ?></div>
 										</container>
 										</td>
