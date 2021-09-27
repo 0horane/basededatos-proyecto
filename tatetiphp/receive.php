@@ -1,7 +1,7 @@
 <?php
-session_start();
-require("r_gameengine.php");
-require("r_sqlinit.php");
+require_once("r_session.php");
+require_once("r_gameengine.php");
+require_once("r_sqlinit.php");
 $gameboard = new game();
 $gameboard2 = new game();
 $datareceived=mysqli_fetch_assoc($mysqlinstance->query("select * from games where gameid = " . $_GET["gameid"] ));//["board"]

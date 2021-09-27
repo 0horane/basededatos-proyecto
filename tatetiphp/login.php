@@ -1,6 +1,6 @@
 <?php
 
-require("r_sqlinit.php");
+require_once("r_sqlinit.php");
 
 function done(){
 	if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
@@ -19,7 +19,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 	if(!($result = $mysqlinstance->query($sqlquery))){exit($mysqlinstance->error);}
 	
 	if (mysqli_num_rows($result) == 0) { 
-	$mysqlinstance->query("insert into users VALUES(null,'" . $_POST['usr'] . "' , '" . $_POST['pwd'] . "')");
+	$mysqlinstance->query("insert into users VALUES(null,'" . $_POST['usr'] . "' , md5('" . $_POST['pwd'] . "'))");
 		echo("account created");
 		session_start();
 		$_SESSION["user"]=$_POST['usr'];
@@ -28,7 +28,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 		$_SESSION["id"]=mysqli_fetch_assoc($mysqlinstance->query($sqlquery))["id"];
 		done();
 	} else { 
-	   if  ($_POST['pwd'] == mysqli_fetch_assoc($result)["password"]){
+		if  (md5($_POST['pwd']) == mysqli_fetch_assoc($result)["password"]){
 		   echo("logged in");
 		   session_start();
 		   $_SESSION["user"]=$_POST['usr'];
