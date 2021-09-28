@@ -5,4 +5,10 @@ define('database', 'uttt');
 
 $mysqlinstance = new mysqli(serverIP, user, '', database);
 if ($mysqlinstance->connect_errno) {printf("connect error: " . $mysqlinstance->connect_error);}
+
+
+/*
+$link=mysqli_connect(serverIP, user, '', database);
+
+*/
 ?>
