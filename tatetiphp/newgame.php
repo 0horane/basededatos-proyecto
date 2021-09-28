@@ -19,9 +19,11 @@ if (mysqli_num_rows($result) == 0) { echo "r1 <br>";
 } else {
 	$game = mysqli_fetch_assoc($result);
 	if ($game["useridX"]==0){	echo "r2 <br>";
-		$mysqlinstance->query("UPDATE games SET useridX =" . $_SESSION["id"]. " WHERE gameid =" . $game["gameid"]);  
+		$query="UPDATE games SET useridX =" . $_SESSION["id"]. " WHERE gameid =" . $game["gameid"];  
+		if(!($result = $mysqlinstance->query($query))){exit($mysqlinstance->error);}
 	} else {
-		$mysqlinstance->query("UPDATE games SET useridO =" . $_SESSION["id"]. " WHERE gameid =" . $game["gameid"]);  
+		$query="UPDATE games SET useridO =" . $_SESSION["id"]. " WHERE gameid =" . $game["gameid"];  
+		if(!($result = $mysqlinstance->query($query))){exit($mysqlinstance->error);}
 	}
 }
 header('Location: index.php'); // SWITCH TO GAMEID
