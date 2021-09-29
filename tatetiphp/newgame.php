@@ -18,6 +18,14 @@ if (mysqli_num_rows($result) == 0) { //echo "r1 <br>";
 	
 } else {
 	$game = mysqli_fetch_assoc($result);
+	while($game){
+		if($game["useridX"]==$_SESSION["id"] || $game["useridO"]==$_SESSION["id"]){
+			$game = mysqli_fetch_assoc($result);
+		} else {
+			break;
+		}
+	}
+	
 	if ($game["useridX"]==0){	//echo "r2 <br>";
 		$query="UPDATE games SET useridX =" . $_SESSION["id"]. " WHERE gameid =" . $game["gameid"];  
 		if(!($result = $mysqlinstance->query($query))){exit($mysqlinstance->error);}

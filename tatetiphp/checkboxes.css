@@ -1,7 +1,8 @@
 .o{
     color:#7d81ff;
     text-align:center;
-
+	width:25px;
+	height:25px;
     
 }
 
@@ -9,6 +10,9 @@
 .x{
     color:#ff6257;
     text-align:center;
+	width:25px;
+	height:25px;
+    
 }
 
 .lX{

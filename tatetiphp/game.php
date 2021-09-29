@@ -61,5 +61,8 @@ if (!($datareceived["board"]=="")){
 		<pre>
 		<?php //var_dump($gameboard->board); ?>
 		</pre>
+		<form action="index.php" >	
+			<input type="submit" value="Return to Main Menu">
+		</form>
 	</body>
 </html>
