@@ -9,7 +9,8 @@ $gameboard->reset(1,1);
 if ( ( $datareceived["useridX"] == $_SESSION["id"] && $datareceived["turn"] == 1 ) || ( $datareceived["useridO"] == $_SESSION["id"] && $datareceived["turn"] == 0 )){
 	header("Refresh:3");
 }
-
+require_once("r_logout.php");
+	
 //var_dump($_SESSION);
 //echo("<br>");
 //var_dump($datareceived);

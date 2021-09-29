@@ -2,6 +2,7 @@
 	
 	require_once("r_session.php");
 	require_once("r_sqlinit.php");
+	require_once("r_logout.php");
 	
 	$sqlquery= 'select * from games where (games.result = 0) and (games.useridX = "' . $_SESSION['id'] . '" or games.useridO = "' . $_SESSION['id'] . '")';
 	if(!($result = $mysqlinstance->query($sqlquery))){exit($mysqlinstance->error);}

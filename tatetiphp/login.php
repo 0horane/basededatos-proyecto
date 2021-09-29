@@ -11,7 +11,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 	
 	if (mysqli_num_rows($result) == 0) { 
 	$mysqlinstance->query("insert into users VALUES(null,'" . $_POST['usr'] . "' , md5('" . $_POST['pwd'] . "'))");
-		echo("account created");
+		//echo("account created");
 		session_start();
 		$_SESSION["user"]=$_POST['usr'];
 		$_SESSION["msg"]="account created";
@@ -21,7 +21,7 @@ if(!empty($_POST['usr']) && !empty($_POST['pwd'])){
 		exit;
 	} else { 
 		if  (md5($_POST['pwd']) == mysqli_fetch_assoc($result)["password"]){
-		   echo("logged in");
+		//   echo("logged in");
 		   session_start();
 		   $_SESSION["user"]=$_POST['usr'];
 		   $_SESSION["msg"]="logged in";
