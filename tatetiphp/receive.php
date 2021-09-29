@@ -10,9 +10,9 @@ $gameboard2->reset(1,1);
 
 if (!($datareceived["board"]=="")){
 	$moveslist=explode(",",$datareceived["board"]);
-	var_dump($moveslist);
-	echo "<br>";
-	var_dump($datareceived["board"]);
+//	var_dump($moveslist);
+//	echo "<br>";
+//	var_dump($datareceived["board"]);
 	for ($i=0;$i<count($moveslist);$i++){
 		$gameboard->move($moveslist[$i]);
 		$gameboard2->move($moveslist[$i]);
