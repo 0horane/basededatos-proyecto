@@ -34,18 +34,15 @@
             $.ajax(
                     {
                         url:"https://api.darksky.net/forecast/b4497c8a6b18bf75776b7fd997f2b90a/-34.6103138,-58.4076534?lang=es&units=ca",
+						
                         dataType:"json",
                         success: function(result){
                             str="";
                                 for (x=0;x<8;x++){
-                                    $(div).append("<div class='col-sm-12 col-md-2 dsqr'><img src='"+result["daily"]["data"][x]["icon"]+".svg' >"+days[new Date(result["daily"]["data"][x]["time"]*1000).getDay()]+"</div><div class='col-md'></div>"); //$(div).html()
+                                    $(div).append("<div class='col-sm-12 col-md-2 dsqr'><img src='img/"+result["daily"]["data"][x]["icon"]+".svg' >"+days[new Date(result["daily"]["data"][x]["time"]*1000).getDay()]+"</div><div class='col-md'></div>"); //$(div).html()
 
                                 }
-                                
-                                for (x=0;x<8;x++){
-                                    
-                                }
-                        }
+						}
                     }   
                 
                 );

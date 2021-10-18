@@ -54,7 +54,7 @@
                             str="";
                             str+='<table><tr>';
                                 for (x=0;x<8;x++){
-                                    str+="<td><div class='dsqr'><p>"+days[new Date(result["daily"]["data"][x]["time"]*1000).getDay()]+"</p><img src='"+result["daily"]["data"][x]["icon"]+".svg' ><p class='temp'>"+Math.round(result["daily"]["data"][x]["temperatureMax"])+"°.  <span>"+Math.round(result["daily"]["data"][x]["temperatureMin"])+"°.</span></p></div></td><td>  </td>"; //$(div).html()
+                                    str+="<td><div class='dsqr'><p>"+days[new Date(result["daily"]["data"][x]["time"]*1000).getDay()]+"</p><img src='img/"+result["daily"]["data"][x]["icon"]+".svg' ><p class='temp'>"+Math.round(result["daily"]["data"][x]["temperatureMax"])+"°.  <span>"+Math.round(result["daily"]["data"][x]["temperatureMin"])+"°.</span></p></div></td><td>  </td>"; //$(div).html()
 
                                 }
                                 

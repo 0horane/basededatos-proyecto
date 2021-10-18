@@ -3,15 +3,15 @@
 	<form>
 
 		
-city	<input type='text' name='city' > 
-phone	<input type='text' name='phone' > 
-addressLine1	<input type='text' name='addressLine1' > 
-addressLine2	<input type='text' name='addressLine2' > 
-state	<input type='text' name='state' > 
-country	<input type='text' name='country' > 
-postalCode	<input type='text' name='postalCode' > 
-territory<input type='text' name='territory' > 
-		<input type='submit'>
+city	<input type='text' name='city' >  <br>
+phone	<input type='text' name='phone' > <br>
+addressLine1	<input type='text' name='addressLine1' ><br> 
+addressLine2	<input type='text' name='addressLine2' > <br>
+state	<input type='text' name='state' > <br>
+country	<input type='text' name='country' > <br>
+postalCode	<input type='text' name='postalCode' > <br>
+territory<input type='text' name='territory' > <br>
+		<input type='submit'><br>
 	</form>
 <?php
 	
