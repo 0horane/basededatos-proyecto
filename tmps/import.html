@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<script>
+function httpGetAsync(theUrl, callback)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() { 
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                callback(xmlHttp.responseText);
+        }
+        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+        xmlHttp.send(null);
+    }
+</script>
+
+
+
+
+
+</head>
+<body>
+
+<script>
+    htmlstr="";
+    cssstr="";
+    maxa=0;
+    maxp=0;
+    //https://api.le-systeme-solaire.net/rest
+    httpGetAsync("https://api.le-systeme-solaire.net/rest/bodies", function(result){
+        JSON.parse(result).bodies.forEach(function(body){
+            if(body.aphelion > maxa){
+                maxa=body.aphelion
+            }
+            if(body.perihelion > maxp){
+                maxp=body.perihelion
+            }
+            console.log(body);
+            temphtmlstr=`<div id="${body.englishName}-y">
+                        <div id="${body.englishName}"><div class="pinfo border border-white rounded">
+                            <h6>${body.englishName}</h6>
+                            <img src="img/venus.png" alt="Imagen de ${body.englishName}">
+                            <p>Venus es el segundo planeta del sistema solar en orden de distancia desde el Sol, el sexto en cuanto a tamaño, ordenados de mayor a menor. Al igual que Mercurio, carece de satélites naturales. Recibe su nombre en honor a Venus, la diosa romana del amor (gr. Afrodita). Se trata de un planeta de tipo rocoso y terrestre, llamado con frecuencia el planeta hermano de la Tierra, ya que ambos son similares en cuanto a tamaño, masa y composición, aunque totalmente diferentes en cuestiones térmicas y atmosféricas.</p>
+                        </div></div>
+                    </div>   `;
+
+            tempcssstr=
+            `#${body.englishName}-y {
+            animation: ${body.englishName}-r-y ${Math.log(body.sideralOrbit)}s;
+            position:absolute;
+            animation-iteration-count: infinite;
+            animation-timing-function:ease-in-out;
+
+            }
+            .${body.englishName} {
+            position: relative;
+            width: ${Math.log(body.meanRadius)}px;
+            height: ${Math.log(body.meanRadius)}px;
+            border-radius: 50%;
+            background-color: rgb(165, 165, 165);
+            animation: ${body.englishName}-r-x ${Math.log(body.sideralOrbit)}ss;
+            animation-iteration-count: infinite;
+            animation-timing-function:ease-in-out;
+            animation-delay: ${Math.log(body.sideralOrbit)/4}s;
+            /*box-shadow:  0 0 6px  rgb(165, 165, 165);*/
+            } 
+            @keyframes ${body.englishName}-r-y{
+            0%{transform: translateY(-${Math.log(body.perihelion)}px);}
+            50%{transform: translateY(50px);}    
+            100%{transform: translateY(-50px);}}
+            @keyframes ${body.englishName}-r-x{
+            0%{transform: translateX(-50px);}
+            50%{transform: translateX(50px);}
+            100%{transform: translateX(-50px);}}`;
+
+        });
+        
+    //https://stackoverflow.com/questions/34035422/google-image-search-says-api-no-longer-available
+    //https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext=1&titles=Neptune
+    console.log(maxa);
+    console.log(maxp);
+    });
+
+    
+</script>
+
+</body>
+</html>
