@@ -20,17 +20,19 @@ while ($row=mysqli_fetch_assoc($colarr)){
 	
 			<th><?php echo $row['Field']; ?></th>
 <?php } ?> </tr> <?php
-reset($colarr);
+$colarr=reset($colarr);
 while ($row=mysqli_fetch_array($result)){
 //	print_r($row);
 	?>
 	<tr>
-	<?php
+	<?php/*
 		for ($i=0;$i<mysqli_num_fields($colarr);$i++){
 			?>
 			<td><?php echo $row[$i]; ?></td>
 			<?php
-		}
+		}*/
+		
+		
 	?>
 	</tr>
 <?php
