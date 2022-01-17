@@ -1,0 +1,30 @@
+body{
+	background-color: ffbaba;
+
+}
+
+h1{
+	font-family: sans-serif;
+	text-align:center;
+}
+
+.sq{
+	height:30;
+	width:1;
+	background-color:ddffd1;
+	font-size:29;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sq:hover{
+	height:30;
+	width:400;
+	background-color:ddffd1;
+	font-size:29;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	transition: width  2s;
+}
